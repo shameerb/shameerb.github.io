@@ -26,7 +26,17 @@ const toc = generateToc(headings);
 		</ol>
 	</nav>
 </details>
-
+<!-- <div class="toc sticky top-8 hidden max-h-[calc(100vh-4rem)] overflow-y-auto lg:block">
+	<h2 class="heading-3 mb-4">Table of Contents</h2>
+	<nav class="space-y-2 pr-4">
+		{
+			headings.map((heading) => (
+				<a class="toc-h{heading.depth} hover:text-accent block" href={`#${heading.slug}`}>
+					{heading.text}
+				</a>
+			))
+		}
+	</nav> -->
 <style>
 	/* Removed the book-index styling with the vertical line */
 	details[open] .toggle-icon {

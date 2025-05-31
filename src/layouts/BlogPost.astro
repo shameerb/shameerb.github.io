@@ -36,7 +36,9 @@ const showTOC = (post.data.showTOC ?? siteConfig.enableTOC) && !!headings.length
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start">
 			{showTOC && <TOC headings={headings} />}
 			<div
-				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none mx-auto max-w-4xl border-t border-[var(--color-ui-2)] pt-6"
+				class={`prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none mx-auto border-t border-[var(--color-ui-2)] pt-6 ${
+					showTOC ? "lg:flex-1" : "max-w-4xl"
+				}`}
 			>
 				<slot />
 				<WebMentions />

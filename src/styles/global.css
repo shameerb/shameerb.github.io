@@ -99,7 +99,7 @@
 	/* Primary heading (page titles) - matches title class exactly */
 	.heading-1 {
 		/* @apply  text-[var(--color-tx-2)] text-2xl font-semibold mb-6; */
-		@apply text-accent-2 text-2xl font-semibold mb-6 ;
+		@apply text-accent text-2xl font-semibold mb-6 ;
 	}
 	
 	/* Section headings */
@@ -136,6 +136,16 @@
 	.post-title {
 		@apply text-accent-2 text-4xl font-semibold mb-6 pt-1;
 		/* Add any additional spacing used in blog post titles */
+	}
+
+	@media (max-width: 640px) {
+		.post-title {
+			@apply text-3xl;
+		}
+
+		.prose {
+			@apply max-w-full overflow-x-auto;
+		}
 	}
 	
 	/* Year headings in listings */
