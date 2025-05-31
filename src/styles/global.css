@@ -98,12 +98,15 @@
 	
 	/* Primary heading (page titles) - matches title class exactly */
 	.heading-1 {
-		@apply text-accent-2 text-2xl font-semibold mb-6;
+		/* @apply  text-[var(--color-tx-2)] text-2xl font-semibold mb-6; */
+		@apply text-accent-2 text-2xl font-semibold mb-6 ;
 	}
 	
 	/* Section headings */
 	.heading-2 {
-		@apply text-accent-2 text-xl font-semibold mb-6;
+		/* @apply text-[var(--color-tx-2)] mb-6 text-xl font-normal */
+		/* @apply text-accent-2 mb-6 text-xl font-normal */
+		@apply text-accent mb-6 text-xl font-normal
 	}
 	
 	/* Subsection headings like TOC */

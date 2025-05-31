@@ -4,6 +4,7 @@ description: "An in-depth exploration of modern web development practices, from 
 publishDate: 2024-03-20
 tags: ["web development", "architecture", "best practices", "performance"]
 draft: true
+showTOC: true
 ---
 
 # The Evolution of Web Development: A Comprehensive Guide to Modern Practices
