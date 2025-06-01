@@ -31,6 +31,7 @@
 }
 
 @layer base {
+	
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
@@ -96,6 +97,7 @@
 	** Semantic classes that match existing styling exactly
 	*/
 	
+
 	/* Header Components */
 	.header {
 		@apply relative pb-10;
@@ -214,7 +216,7 @@
 
 	/* Blog post title */
 	.post-title {
-		@apply text-accent-2 text-4xl font-semibold mb-6 pt-1;
+		@apply text-accent text-3xl font-semibold mb-6 pt-1 text-center;
 		/* Add any additional spacing used in blog post titles */
 	}
 
@@ -328,4 +330,17 @@
 	--tw-prose-paragraph-spacing: 1.4em;
 	letter-spacing: -0.003em;
 	line-height: 1.65;
+
+	h1 {
+		@apply text-accent text-2xl font-normal mb-6;
+	}
+	h2 {
+		@apply text-accent text-xl font-normal mb-6;
+	}
+	h3 {
+		@apply text-accent text-lg font-normal mb-4;
+	}
+	h4 {
+		@apply text-accent text-base font-normal mb-4;
+	}
 }
