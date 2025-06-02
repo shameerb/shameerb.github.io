@@ -3,7 +3,7 @@ title: "The Art of Deep Work: A Longform Placeholder"
 description: "A comprehensive exploration of focus, productivity, and the science of deep work in the modern world."
 publishDate: "2024-03-20"
 updatedDate: "2024-03-20"
-showTOC: true
+# showTOC: true
 tags: ["deep work", "focus", "productivity", "longform"]
 draft: true
 ---

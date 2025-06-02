@@ -9,7 +9,7 @@
     - [x] temporary disable the TOC. Keep the code but temporarily disable using a flag at the config level
     - [x] the date and min to read needs to be lighter color
     - [x] main title needs to be bigger than h1 of the body
-- [ ] reduce the weight of the font across
+- [x] reduce the weight of the font across
 - blogs list page
 - header
     - [x] remove the padding at the top, the header is too low
@@ -22,7 +22,21 @@
     - [x] remove the social media handles in the middle. it should only be at the end. 
     - [x] increase the size of the social media handles at the footer
     - [x] change the title Post, Notes to lighter, thinner and smaller font style, gray color
-    - [ ] add social media handles for linkedin and twitter
+    - [x] add social media handles for linkedin and twitter
     - [ ] add new pages for about me
 - notes 
-    - [ ] ideally link to digital garden quartz website garden.shameerb.com
+    - [-] ideally link to digital garden quartz website garden.shameerb.com 
+- header
+    - [ ] the dropdown for menu items is too big and not a clean design. make it simple, small and minimal.
+    - [ ] no underline required for the menu items in dropdown mode (mobile view mode), but required for normal mode
+- individual blog
+    - [ ] make the `table of contents` slightly smaller. 
+    - [ ] add some padding to the right of the `table of contents`
+    - on mobile view or smaller devices there are a few issues
+        - [ ] the title of blog is too big in this view.
+        - [ ] the text contents of the blog do not wrap properly. The text overflows and I have to scroll a lot horizontally to read it. It does that cleanly for home page
+
+## Notation
+- [ ] pending task
+- [x] done task
+- [-] cancelled task

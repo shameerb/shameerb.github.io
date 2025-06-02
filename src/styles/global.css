@@ -31,10 +31,11 @@
 }
 
 @layer base {
+	
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
-		font-family: -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", Segoe UI, Helvetica, Arial, sans-serif;
+		/* font-family: -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", Segoe UI, Helvetica, Arial, sans-serif; */
 		font-size: 18px;
 		line-height: 1.4;
 		-webkit-font-smoothing: antialiased;
@@ -96,14 +97,98 @@
 	** Semantic classes that match existing styling exactly
 	*/
 	
+
+	/* Header Components */
+	.header {
+		@apply relative pb-10;
+	}
+
+	.header__inner {
+		@apply flex items-center justify-between max-w-3xl mx-auto px-0;
+	}
+
+	.header__title {
+		@apply text-lg font-medium no-underline text-[var(--color-text)] font-['Inter',_'Work_Sans',_sans-serif] tracking-[0.05em] opacity-90 m-0 p-0;
+	}
+
+	.header__nav {
+		@apply flex items-center gap-4;
+	}
+
+	.header__link {
+		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2 text-[var(--color-text)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] tracking-[0.05em] opacity-90;
+	}
+
+	.header__actions {
+		@apply flex items-center gap-2 ml-2;
+	}
+
+	.header__actions :global(button) {
+		@apply h-7 w-7 p-1;
+	}
+
+	.header__actions :global(svg) {
+		@apply h-5 w-5;
+	}
+
+	/* Mobile navigation styles */
+	.mobile-nav {
+		@apply hidden items-center gap-2;
+	}
+
+	.mobile-menu-button {
+		@apply bg-transparent border-none cursor-pointer p-1 flex items-center justify-center text-[var(--color-text)] relative z-20;
+	}
+
+	.menu-icon {
+		@apply w-6 h-6 transition-transform duration-200 ease-in-out;
+	}
+
+	.menu-open .menu-icon {
+		@apply rotate-90;
+	}
+
+	.mobile-menu-dropdown {
+		@apply absolute top-full right-0 bg-[var(--color-ui)] border border-[var(--color-ui-2)] rounded p-2 min-w-[120px] z-10 shadow hidden flex-col;
+	}
+
+	.mobile-menu-open {
+		@apply flex;
+	}
+
+	.mobile-menu-item {
+		@apply px-4 py-2 no-underline text-[var(--color-text)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] uppercase tracking-[0.05em] opacity-90 hover:bg-[var(--color-ui-2)];
+	}
+
+	@media (max-width: 768px) {
+		.desktop-nav {
+			@apply hidden;
+		}
+
+		.mobile-nav {
+			@apply flex;
+		}
+
+		.header__inner {
+			@apply px-4;
+		}
+
+		.header__link {
+			@apply no-underline;
+		}
+	}
+
 	/* Primary heading (page titles) - matches title class exactly */
 	.heading-1 {
-		@apply text-accent-2 text-2xl font-semibold mb-6;
+		/* @apply  text-[var(--color-tx-2)] text-2xl font-semibold mb-6; */
+		@apply text-accent text-2xl font-semibold mb-6 ;
 	}
 	
 	/* Section headings */
 	.heading-2 {
-		@apply text-accent-2 text-xl font-semibold mb-6;
+		/* @apply text-[var(--color-tx-2)] mb-6 text-xl font-normal */
+		/* @apply text-accent-2 mb-6 text-xl font-normal */
+		@apply text-accent mb-6 text-xl font-normal
 	}
 	
 	/* Subsection headings like TOC */
@@ -131,8 +216,18 @@
 
 	/* Blog post title */
 	.post-title {
-		@apply text-accent-2 text-4xl font-semibold mb-6 pt-1;
+		@apply text-accent text-3xl font-semibold mb-6 pt-1 text-center;
 		/* Add any additional spacing used in blog post titles */
+	}
+
+	@media (max-width: 640px) {
+		.post-title {
+			@apply text-3xl;
+		}
+
+		.prose {
+			@apply max-w-full overflow-x-auto;
+		}
 	}
 	
 	/* Year headings in listings */
@@ -235,4 +330,17 @@
 	--tw-prose-paragraph-spacing: 1.4em;
 	letter-spacing: -0.003em;
 	line-height: 1.65;
+
+	h1 {
+		@apply text-accent text-2xl font-normal mb-6;
+	}
+	h2 {
+		@apply text-accent text-xl font-normal mb-6;
+	}
+	h3 {
+		@apply text-accent text-lg font-normal mb-4;
+	}
+	h4 {
+		@apply text-accent text-base font-normal mb-4;
+	}
 }

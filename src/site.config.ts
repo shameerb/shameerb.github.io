@@ -25,7 +25,7 @@ export const siteConfig: SiteConfig = {
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "Shameer",
+	title: "shameer",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://shameerb.com/",
 	// Flag to disable TOC
@@ -34,7 +34,7 @@ export const siteConfig: SiteConfig = {
 	socialLinks: {
 		github: "https://github.com/shameerb",
 		twitter: "https://x.com/shameer_123",
-		linkedin: "https://linkedin.com/in/shameerb"
+		linkedin: "https://www.linkedin.com/in/shameerb"
 	},
 };
 
@@ -46,8 +46,13 @@ export const menuLinks: { path: string; title: string }[] = [
 	// },
 	{
 		path: "/posts/",
-		title: "Blog",
-	},
+		title: "blog",
+	}
+	// ,
+	// {
+	// 	path: "/about/",
+	// 	title: "about",
+	// },
 	// {
 	// 	path: "/notes/",
 	// 	title: "Notes",
