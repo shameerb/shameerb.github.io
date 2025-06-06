@@ -33,8 +33,8 @@
     - [ ] make the `table of contents` slightly smaller. 
     - [ ] add some padding to the right of the `table of contents`
     - on mobile view or smaller devices there are a few issues
-        - [ ] the title of blog is too big in this view.
-        - [ ] the text contents of the blog do not wrap properly. The text overflows and I have to scroll a lot horizontally to read it. It does that cleanly for home page
+        - [ ] the title of blog is too big in this view. (mobile view)
+        - [ ] the text contents of the blog do not wrap properly. The text overflows and I have to scroll a lot horizontally to read it. It does that cleanly for home page (mobile view)
 
 ## Notation
 - [ ] pending task
