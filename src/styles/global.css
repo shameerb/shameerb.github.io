@@ -50,7 +50,7 @@
 			--color-global-bg: #100F0F;
 			--color-global-text: #FFFCF0;
 			--color-link: #4385BE;
-			--color-accent: #DA702C;
+			--color-accent: #E6A15C;
 			--color-accent-2: #FFFCF0;
 			--color-quote: #DA702C;
 			--color-ui: #1C1B1A;
@@ -216,7 +216,7 @@
 
 	/* Blog post title */
 	.post-title {
-		@apply text-accent text-3xl font-semibold mb-6 pt-1 text-center;
+		@apply text-accent text-3xl font-normal mb-6 pt-1 text-center;
 		/* Add any additional spacing used in blog post titles */
 	}
 
