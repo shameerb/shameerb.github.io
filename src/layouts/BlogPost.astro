@@ -29,14 +29,14 @@ const showTOC = (post.data.showTOC ?? siteConfig.enableTOC) && !!headings.length
 		title,
 	}}
 >
-	<article class="mt-6 grow break-words" data-page find-body>
+	<article class="mt-6 w-full grow break-words" data-page find-body>
 		<div id="blog-hero" class="mb-8">
 			<Masthead content={post} readingTime={readingTime} />
 		</div>
-		<div class="flex flex-col gap-10 lg:flex-row lg:items-start">
+		<div class="flex w-full flex-col gap-10 lg:flex-row lg:items-start">
 			{showTOC && <TOC headings={headings} />}
 			<div
-				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full border-t border-[var(--color-ui-2)] pt-6"
+				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6"
 			>
 				<slot />
 				<WebMentions />
