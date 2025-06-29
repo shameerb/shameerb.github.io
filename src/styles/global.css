@@ -332,13 +332,13 @@
 	line-height: 1.65;
 
 	h1 {
-		@apply text-accent text-2xl font-normal mb-6;
+		@apply text-accent-2 text-2xl font-normal mb-6;
 	}
 	h2 {
-		@apply text-accent text-xl font-normal mb-6;
+		@apply text-accent-2 text-xl font-normal mb-6;
 	}
 	h3 {
-		@apply text-accent text-lg font-normal mb-4;
+		@apply text-accent-2 text-lg font-normal mb-4;
 	}
 	h4 {
 		@apply text-accent text-base font-normal mb-4;
