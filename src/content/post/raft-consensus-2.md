@@ -4,7 +4,7 @@ description: "Raft: An Understandable Guide to Consensus"
 publishDate: "21 Augus 2025"
 updatedDate: "21 Augus 2025"
 tags: ["distributed-systems", "golang"]
-# draft: true
+draft: true
 # showTOC: true
 ---
 
