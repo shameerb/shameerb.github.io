@@ -1,4 +1,9 @@
 ## todos
+- must do
+    - [ ] too much spacing between the headers h2 and texts. 
+    - [ ] too much space between the header and the blog title
+    - [ ] the header should be wider (shameer and blog with mode change should extend to the screen size). the width of the blog content is actually correct.
+    - [ ] 
 - individual blog post
     - [ ] the blog content (text) width is smaller than the article body width. it should be same and wide. 
     - [x] change individual blog post title size to be bigger than h1
