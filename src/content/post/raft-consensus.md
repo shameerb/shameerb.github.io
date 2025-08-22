@@ -5,7 +5,7 @@ publishDate: "21 Augus 2025"
 updatedDate: "21 Augus 2025"
 tags: ["distributed-systems", "golang"]
 # draft: true
-showTOC: true
+showTOC: false
 ---
 
 *The best way I’ve found to learn distributed systems is to build them.*
