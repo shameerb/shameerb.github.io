@@ -1,85 +1,87 @@
 ---
-title: "Raft: A distributed consensus algorithm"
-description: "Raft: A distributed consensus algorithm"
-publishDate: "20 Augus 2025"
-updatedDate: "20 Augus 2025"
+title: "Learning Raft by Building It"
+description: "Raft: An Understandable Guide to Consensus"
+publishDate: "21 Augus 2025"
+updatedDate: "21 Augus 2025"
 tags: ["distributed-systems", "golang"]
-draft: true
+# draft: true
 showTOC: true
 ---
 
+*The best way I’ve found to learn distributed systems is to build them.*
 
-<!-- # **Understanding Raft: Consensus Made Simple** -->
+When I first started exploring consensus, I quickly realized how abstract it felt. In theory it’s “just agreeing on a value.” In practice? Machines crash, networks drop packets, two nodes both think they’re in charge… and suddenly your “cluster” isn’t clustered at all.
 
-Distributed systems are everywhere—databases, cloud services, microservices platforms. But making a cluster of machines **act like one reliable system** is harder than it sounds. Machines fail, networks split, messages get delayed or dropped. How do you ensure that **all nodes agree on the same state**, no matter what?
+That’s why I chose to implement **Raft** in Go—not because the world needs another Raft implementation, but because building it forces you to understand what really happens when theory meets reality.
 
-That’s the **consensus problem**. And Raft is one of the most widely used solutions.
+## Why Raft?
 
-## Why Do We Need Consensus?
+Consensus is about making sure multiple replicas of a system agree on the same sequence of operations, even in the face of failures. Raft was designed to be:
 
-Imagine three servers keeping track of bank transactions. If one accepts a withdrawal but another doesn’t, suddenly your account shows two different balances. That’s unacceptable.
+- **Understandable** → clear roles (leader, follower, candidate) and clean rules.
+- **Practical** → widely used in production systems like etcd (Kubernetes datastore), Consul, CockroachDB, and TiKV.
+- **Reliable** → once something is committed, it’s committed everywhere.
 
-Consensus protocols guarantee that **every server agrees on the same log of operations**—even if some crash or networks misbehave. This replicated log then drives the actual application (like a key-value store, database, or service registry).
+In short: Raft makes a messy cluster behave like a single reliable system.
 
-Other protocols like **Paxos** existed earlier, but Raft became popular because it’s **understandable and implementable**—a consensus algorithm designed to be taught.
+In practice, Raft is used for:
+-  Metadata/configuration stores (etcd, Consul).
+-  Databases with replication (CockroachDB, TiKV).
+-  Coordination services where strong consistency matters.
 
-## The Raft Mental Model (in one picture)
+## How Raft Works (at a High Level)
 
-Raft splits the problem into three digestible parts:
+### Leader Election
+-  Nodes start as followers.
+-  If they don’t hear from a leader, they hold an election.
+-  Majority vote decides the leader; ties resolve via randomized timeouts.
 
-1. **Leader election** – pick one node to be the “boss” who orders client requests.
-2. **Log replication** – the leader appends entries and ensures they are copied consistently to followers.
-3. **Safety** – even with crashes, no two leaders will ever commit conflicting results.
+### Log Replication
+- Clients send commands (e.g. `SET key value`) to the leader.
+- The leader appends the command to its log and replicates it to followers.
+- Once a majority acknowledge, the entry is committed and applied everywhere.
 
-At any time, nodes in a Raft cluster are in one of three roles:
+### Safety
+- One leader per term.
+- Logs with the same index and term are identical.
+- Committed entries are never rolled back.
 
-* **Leader**: handles client requests, manages replication.
-* **Follower**: passive, accepts updates from the leader.
-* **Candidate**: a follower that times out and tries to become leader.
+## What I Actually Built
 
-Time is divided into **terms** (like “epochs”); each term has at most one leader.
+To keep things simple, I built a **toy Raft-backed key/value store**:
+- Three nodes running in one process.
+- Elections and heartbeats managed with timers.
+- Commands flow through leader election, replication, and commitment.
+- Snapshots and write-ahead logs for persistence, so nodes can restart without forgetting their state.
 
-## Leader Election (Step 1)
-
-* Nodes start as **followers**, waiting for heartbeat messages from the leader.
-* If a follower waits too long (timeout) without hearing from a leader, it becomes a **candidate**.
-* Candidates ask for votes (`RequestVote` RPC).
-* If a candidate gets a majority, it becomes the new **leader** and starts sending heartbeats.
-* Randomized timeouts avoid ties, so usually only one node wins.
-
-
-## Log Replication (Step 2)
-
-* Clients send commands (e.g., `PUT key=value`) to the **leader**.
-* The leader appends this command as a **log entry**.
-* The leader sends **AppendEntries** RPCs to followers.
-* Once a majority have written the entry, the leader **commits** it and applies it to the state machine.
-* Followers apply the entry too—keeping the cluster in sync.
-
-This ensures that every node sees the same sequence of operations.
+It’s not production-ready—no network partitions, no cluster reconfiguration—but it demonstrates the core Raft mechanics clearly.
 
 
-## Safety (Step 3)
+## Why Build Instead of Just Read?
 
-Raft ensures:
+Because **building makes the abstractions real**.
+- Timeouts stop being abstract numbers—you *feel* them when your leader disappears.
+- Watching logs replicate across nodes shows you how consistency emerges.
+- Crashing a node mid-commit teaches more than any paper footnote ever could.
 
-* **Log Matching**: if two entries share an index and term, their history is identical.
-* **Leader Completeness**: committed entries never get lost; future leaders must contain them.
-* **State Machine Safety**: entries are applied in the same order everywhere.
-
-Even after crashes or restarts, the system won’t diverge.
-
-
-## Who Uses Raft?
-
-You may already rely on Raft daily without knowing:
-
-* **etcd** (Kubernetes’ backbone)
-* **Consul** (service discovery)
-* **TiKV & CockroachDB** (distributed databases)
-* **HashiCorp Nomad** (scheduler)
-
-It’s the “go-to” consensus algorithm for production systems.
+That hands-on experience is what makes distributed systems less mysterious and more approachable.
 
 
-## Coming Up: Building Raft in Go
+## What’s Next
+
+This post was about the *concepts*—why Raft matters and what problems it solves.
+
+In **another post**, I’ll walk through the actual **Go implementation** of the toy KV store: how elections are coded, how log replication is wired, and where the tricky edge cases live.
+
+
+## Takeaway
+
+Consensus is a hard problem, but Raft makes it accessible. By implementing even a small version, you can see how leader election, log replication, and safety guarantees keep a cluster consistent.
+
+And once you’ve seen Raft in action, you’ll recognize it as the beating heart of many of today’s distributed systems.
+
+## Resources
+
+* [Raft paper (Ongaro & Ousterhout)](https://raft.github.io/raft.pdf)
+* [Raft Consensus Algorithm](https://raft.github.io/)
+* [Secret Lives of Data (Visualization)](https://thesecretlivesofdata.com/raft/)

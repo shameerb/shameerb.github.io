@@ -15,9 +15,6 @@ Consensus is at the heart of distributed systems. Whenever you replicate state a
 
 That agreement problem is called **consensus**. Raft is a consensus algorithm designed to be **understandable, practical, and implementable**—without sacrificing the guarantees offered by Paxos.
 
-This series will guide you through Raft step by step, from the *why* to the *how*, with examples along the way.
-
-
 ## Part 1 — Why Raft?
 
 Before diving into internals, let’s clarify what Raft solves:
