@@ -81,7 +81,6 @@ Consensus is a hard problem, but Raft makes it accessible. By implementing even 
 And once you’ve seen Raft in action, you’ll recognize it as the beating heart of many of today’s distributed systems.
 
 ## Resources
-
-* [Raft paper (Ongaro & Ousterhout)](https://raft.github.io/raft.pdf)
-* [Raft Consensus Algorithm](https://raft.github.io/)
-* [Secret Lives of Data (Visualization)](https://thesecretlivesofdata.com/raft/)
+* [Raft resources](https://raft.github.io/)  
+* [Raft - the secret lives of data - Visualization](https://thesecretlivesofdata.com/raft/)  
+* [Designing for Understandability: The Raft Consensus Algorithm - Video](https://www.youtube.com/watch?v=vYp4LYbnnW8)  
