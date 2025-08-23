@@ -4,11 +4,12 @@ description: "Raft: An Understandable Guide to Consensus"
 publishDate: "21 Augus 2025"
 updatedDate: "21 Augus 2025"
 tags: ["distributed-systems", "golang"]
+showTOC: true
 ---
 
 *The best way I’ve found to learn distributed systems is to build them.*
 
-When I first started exploring consensus, I quickly realized how abstract it felt. In theory it’s “just agreeing on a value.” In practice? Machines crash, networks drop packets, two nodes both think they’re in charge… and suddenly your “cluster” isn’t clustered at all.
+When I first started exploring the *consensus problem*, I quickly realized how abstract it felt. In theory it’s “just agreeing on a value.” In practice? Machines crash, networks drop packets, two nodes both think they’re in charge… and suddenly your “cluster” isn’t clustered at all.
 
 That’s why I chose to implement **Raft** in Go—not because the world needs another Raft implementation, but because building it forces you to understand what really happens when theory meets reality.
 
