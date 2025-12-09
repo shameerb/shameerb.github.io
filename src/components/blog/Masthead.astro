@@ -35,17 +35,17 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 <h1 class="post-title">
 	{data.title}
 </h1>
-<div class="flex flex-wrap items-center justify-start gap-x-3 gap-y-2">
+<div class="flex flex-wrap items-center justify-start gap-x-2 gap-y-1 text-sm">
 	<p class="text-[var(--color-tx-3)]">
 		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> · {readingTime}
 	</p>
 </div>
 {
 	!!data.tags?.length && (
-		<div class="mt-2">
+		<div class="mt-1 text-sm">
 			<svg
 				aria-hidden="true"
-				class="inline-block h-6 w-6 text-[var(--color-tx-3)]"
+				class="inline-block h-4 w-4 text-[var(--color-tx-3)]"
 				fill="none"
 				focusable="false"
 				stroke="currentColor"

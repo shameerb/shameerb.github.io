@@ -19,6 +19,7 @@ const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.readingTime;
 const showTOC = (post.data.showTOC ?? siteConfig.enableTOC) && !!headings.length;
+const tocPosition = siteConfig.tocPosition;
 ---
 
 <BaseLayout
@@ -29,19 +30,33 @@ const showTOC = (post.data.showTOC ?? siteConfig.enableTOC) && !!headings.length
 		title,
 	}}
 >
-	<article class="mt-6 w-full grow break-words" data-page find-body>
-		<div id="blog-hero" class="mb-8">
+	<article class="w-full grow break-words overflow-hidden" data-page find-body>
+		<div id="blog-hero" class="mb-4">
 			<Masthead content={post} readingTime={readingTime} />
 		</div>
-		<div class="flex w-full flex-col gap-10 lg:flex-row lg:items-start">
-			{showTOC && <TOC headings={headings} />}
+		{showTOC && tocPosition === "top" && (
+			<div class="mb-2">
+				<TOC headings={headings} position="top" />
+			</div>
+		)}
+		{tocPosition === "sidebar" ? (
+			<div class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-8">
+				{showTOC && <TOC headings={headings} position="sidebar" />}
+				<div
+					class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6 overflow-wrap-anywhere lg:flex-1 lg:min-w-0"
+				>
+					<slot />
+					<WebMentions />
+				</div>
+			</div>
+		) : (
 			<div
-				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6"
+				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6 overflow-wrap-anywhere"
 			>
 				<slot />
 				<WebMentions />
 			</div>
-		</div>
+		)}
 	</article>
 	<button
 		class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"

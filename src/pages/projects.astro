@@ -1,0 +1,60 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Projects by Shameer - A collection of my personal projects and experiments",
+	title: "Projects",
+};
+---
+
+<PageLayout meta={meta}>
+	<section>
+		<h1 class="heading-1">Projects</h1>
+		<div class="space-y-8">
+			<div>
+				<h2 class="text-2xl font-bold mb-3">Sample Project</h2>
+				<p class="mb-4 opacity-75">
+					This is a placeholder for a real project. A brief description of what this project does,
+					the problem it solves, and the technologies used to build it would go here.
+				</p>
+				<p class="mb-4 opacity-75">
+					Technologies: Go, PostgreSQL, Docker, Kubernetes
+				</p>
+				<div class="flex gap-4">
+					<a href="#" class="cactus-link">View Project</a>
+					<a href="#" class="cactus-link">GitHub</a>
+				</div>
+			</div>
+
+			<div>
+				<h2 class="text-2xl font-bold mb-3">Another Project</h2>
+				<p class="mb-4 opacity-75">
+					Description of another interesting project. This could be an open-source contribution,
+					a personal experiment, or a side project that demonstrates specific skills or technologies.
+				</p>
+				<p class="mb-4 opacity-75">
+					Technologies: TypeScript, React, Node.js, AWS
+				</p>
+				<div class="flex gap-4">
+					<a href="#" class="cactus-link">View Project</a>
+					<a href="#" class="cactus-link">GitHub</a>
+				</div>
+			</div>
+
+			<div>
+				<h2 class="text-2xl font-bold mb-3">Experimental Tool</h2>
+				<p class="mb-4 opacity-75">
+					An experimental developer tool or library. This section would describe the motivation
+					behind the project, key features, and how it can be used by others.
+				</p>
+				<p class="mb-4 opacity-75">
+					Technologies: Rust, WebAssembly, GraphQL
+				</p>
+				<div class="flex gap-4">
+					<a href="#" class="cactus-link">View Project</a>
+					<a href="#" class="cactus-link">GitHub</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</PageLayout>

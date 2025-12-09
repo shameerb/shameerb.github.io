@@ -1,42 +1,19 @@
 ## todos
-- must do
-    - [ ] too much spacing between the headers h2 and texts. 
+- general
+    - [ ] refer to https://www.joonie.dev/
+        - codebase:  https://github.com/iteratetograceness/joonierepo
     - [ ] too much space between the header and the blog title
+    - [ ] within a single post too much spacing between the headers h2 and their texts. also the texts and the next section header h2
     - [ ] the header should be wider (shameer and blog with mode change should extend to the screen size). the width of the blog content is actually correct.
-    - [ ] 
-- individual blog post
-    - [ ] the blog content (text) width is smaller than the article body width. it should be same and wide. 
-    - [x] change individual blog post title size to be bigger than h1
-    - [x] add a underline below h1 and h2 inside blog contents
-    - [x] remove the updated date from the blog post
-    - [x] move the min to read to the right side of date
-    - [x] center align the title of the blog posts
-    - [x] temporary disable the TOC. Keep the code but temporarily disable using a flag at the config level
-    - [x] the date and min to read needs to be lighter color
-    - [x] main title needs to be bigger than h1 of the body
-- [x] reduce the weight of the font across
-- blogs list page
-- header
-    - [x] remove the padding at the top, the header is too low
-    - [x] add some good padding below the header to the main body
-- tags
-    - [x] tag styling needs to be lighter color
-    - [x] tags across pages should be same color (grayed), blog list, individual blog, filter etc.
-- home page
-    - [x] remove the note section
-    - [x] remove the social media handles in the middle. it should only be at the end. 
-    - [x] increase the size of the social media handles at the footer
-    - [x] change the title Post, Notes to lighter, thinner and smaller font style, gray color
-    - [x] add social media handles for linkedin and twitter
-    - [ ] add new pages for about me
-- notes 
-    - [-] ideally link to digital garden quartz website garden.shameerb.com 
-- header
-    - [ ] the dropdown for menu items is too big and not a clean design. make it simple, small and minimal.
-    - [ ] no underline required for the menu items in dropdown mode (mobile view mode), but required for normal mode
+    - [ ] the header changes width on each post and the / or /posts page. It should remain consistent always
+    - [ ] the size of the icon for github, linkedin, twitter is big. It should be a consistent size (similiar to the sections. eg: `blog` at the header)
+- header sections
+    - [ ] currently theres only `blog`, add
+        - [ ] about me
+        - [ ] projects
+- projects
+    - [ ] create the projects page /projects similiar to https://www.joonie.dev/projects and keep a mock project for now
 - individual blog
-    - [ ] make the `table of contents` slightly smaller. 
-    - [ ] add some padding to the right of the `table of contents`
     - on mobile view or smaller devices there are a few issues
         - [ ] the title of blog is too big in this view.
         - [ ] the text contents of the blog do not wrap properly. The text overflows and I have to scroll a lot horizontally to read it. It does that cleanly for home page

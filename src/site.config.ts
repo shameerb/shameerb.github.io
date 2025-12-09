@@ -30,6 +30,8 @@ export const siteConfig: SiteConfig = {
 	url: "https://shameerb.com/",
 	// Flag to disable TOC
 	enableTOC: false,
+	// TOC position: 'top' (above content) or 'sidebar' (next to content)
+	tocPosition: "top" as "top" | "sidebar",
 	// Social media accounts
 	socialLinks: {
 		github: "https://github.com/shameerb",
@@ -47,20 +49,18 @@ export const menuLinks: { path: string; title: string }[] = [
 	{
 		path: "/posts/",
 		title: "blog",
-	}
-	// ,
+	},
 	// {
 	// 	path: "/about/",
-	// 	title: "about",
+	// 	title: "about me",
+	// },
+	// {
+	// 	path: "/projects/",
+	// 	title: "projects",
 	// },
 	// {
 	// 	path: "/notes/",
 	// 	title: "Notes",
-	// },
-	// Projects section disabled temporarily
-	// {
-	// 	path: "/projects/",
-	// 	title: "Projects",
 	// },
 ];
 

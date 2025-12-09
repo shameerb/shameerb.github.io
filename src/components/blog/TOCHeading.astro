@@ -13,9 +13,9 @@ const {
 const depthClass = `toc-h${depth}`;
 ---
 
-<li class={`${depth > 2 ? "ms-1" : ""}`}>
+<li class={`${depth > 2 ? "ms-1" : ""} break-words`}>
 	<a
-		class={`line-clamp-2 hover:text-accent ${depthClass} ${depth === 2 ? "mt-2" : "mt-1"}`}
+		class={`line-clamp-2 hover:text-accent ${depthClass} ${depth === 2 ? "mt-2" : "mt-1"} block`}
 		href={`#${slug}`}>{text}</a
 	>
 	{
