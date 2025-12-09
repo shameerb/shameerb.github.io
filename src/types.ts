@@ -10,6 +10,7 @@ export interface SiteConfig {
 	title: string;
 	url: string;
 	enableTOC?: boolean;
+	tocPosition?: "top" | "sidebar";
 	socialLinks?: {
 		github?: string;
 		twitter?: string;
