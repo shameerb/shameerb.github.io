@@ -7,7 +7,7 @@ tags: ["distributed-systems", "golang"]
 showTOC: true
 ---
 
-*The best way I’ve found to learn distributed systems is to build them.*
+*The best way I've found to learn distributed systems is to build them.*
 
 When I first started exploring the *consensus problem*, I quickly realized how abstract it felt. In theory it’s “just agreeing on a value.” In practice? Machines crash, networks drop packets, two nodes both think they’re in charge… and suddenly your “cluster” isn’t clustered at all.
 

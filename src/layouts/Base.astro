@@ -23,6 +23,15 @@ const {
 	<body
 		class="bg-global-bg text-global-text mx-auto flex min-h-screen flex-col px-8 pt-8 font-sans text-sm font-normal antialiased sm:px-12 md:px-16 lg:px-20"
 	>
+		<!-- SVG filter for marker highlight effect -->
+		<svg width="0" height="0" style="position: absolute;">
+			<defs>
+				<filter id="marker-squiggle">
+					<feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" seed="2" />
+					<feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
+				</filter>
+			</defs>
+		</svg>
 		<ThemeProvider />
 		<SkipLink />
 		<Header />

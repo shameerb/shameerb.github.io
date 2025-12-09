@@ -19,8 +19,8 @@ export const siteConfig: SiteConfig = {
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
 	ogLocale: "en_GB",
-	/* 
-		- Used to construct the meta title property found in src/components/BaseHead.astro L:11 
+	/*
+		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
 		- The webmanifest name found in astro.config.ts L:42
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
@@ -29,9 +29,9 @@ export const siteConfig: SiteConfig = {
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://shameerb.com/",
 	// Flag to disable TOC
-	enableTOC: false,
+	enableTOC: true,
 	// TOC position: 'top' (above content) or 'sidebar' (next to content)
-	tocPosition: "top" as "top" | "sidebar",
+	tocPosition: "sidebar" as "top" | "sidebar",
 	// Social media accounts
 	socialLinks: {
 		github: "https://github.com/shameerb",
