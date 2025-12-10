@@ -108,7 +108,7 @@
 	}
 
 	.header__title {
-		@apply text-2xl font-medium no-underline text-[var(--color-text)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
+		@apply text-3xl font-medium no-underline text-[var(--color-text)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
 	}
 
 	.header__title:hover {
