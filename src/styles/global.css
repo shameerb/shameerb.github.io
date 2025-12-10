@@ -108,11 +108,11 @@
 	}
 
 	.header__title {
-		@apply text-lg font-medium no-underline text-[var(--color-text)] font-['Inter',_'Work_Sans',_sans-serif] tracking-[0.05em] opacity-90 m-0 p-0 transition-all duration-300;
+		@apply text-2xl font-medium no-underline text-[var(--color-text)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
 	}
 
 	.header__title:hover {
-		@apply opacity-100 tracking-[0.08em];
+		@apply opacity-100;
 		transform: translateY(-1px);
 		color: var(--color-accent);
 	}
@@ -155,7 +155,7 @@
 	}
 
 	.mobile-menu-dropdown {
-		@apply absolute top-full right-0 bg-[var(--color-ui)] border border-[var(--color-ui-2)] rounded p-2 min-w-[120px] z-10 shadow hidden flex-col;
+		@apply absolute top-full right-0 bg-[var(--color-ui)] border border-[var(--color-ui-2)] rounded p-1 min-w-[80px] z-10 shadow hidden flex-col;
 	}
 
 	.mobile-menu-open {
@@ -163,7 +163,7 @@
 	}
 
 	.mobile-menu-item {
-		@apply px-4 py-2 no-underline text-[var(--color-text)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] uppercase tracking-[0.05em] opacity-90 hover:bg-[var(--color-ui-2)];
+		@apply px-3 py-1.5 no-underline text-[var(--color-text)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] normal-case opacity-90 hover:bg-[var(--color-ui-2)] rounded;
 	}
 
 	@media (max-width: 768px) {
