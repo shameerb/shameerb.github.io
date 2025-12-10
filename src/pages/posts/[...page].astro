@@ -61,21 +61,21 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		</div>
 		{
 			!!uniqueTags.length && (
-				<aside class="hidden lg:block lg:absolute lg:right-0 lg:translate-x-full lg:w-48 lg:pl-6 lg:top-0 lg:h-full">
+				<aside class="hidden lg:block lg:absolute lg:right-0 lg:translate-x-full lg:w-48 lg:pl-6 lg:top-12 lg:h-full">
 					<div class="lg:sticky lg:top-24">
-						<div class="text-xs">
+						<div class="text-sm">
 							<h2 class="font-medium text-[var(--color-tx)] mb-2">Tags</h2>
 							<div class="flex flex-wrap gap-1">
 								{uniqueTags.map((tag) => (
 									<a
-										class="cactus-link inline-block before:content-['#'] text-xs text-[var(--color-tx-3)] tag"
-										href={`/tags/${tag}/`}
+										class="cactus-link inline-block before:content-['#'] text-sm text-[var(--color-tx-3)] tag"
+										href={`/tags/${encodeURIComponent(tag)}/`}
 									>
 										{tag}
 									</a>
 								))}
 							</div>
-							<span class="mt-4 block text-xs">
+							<span class="mt-4 block text-sm">
 								<a class="hover:text-link tag text-[var(--color-tx-3)]" href="/tags/">
 									View all <span aria-hidden="true">→</span>
 									<span class="sr-only">blog tags</span>
@@ -94,7 +94,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 							<span class="sr-only">Posts in</span>
 							{yearKey}
 						</h2>
-						<ul class="mt-5 mb-16 space-y-4 text-start">
+						<ul class="mt-5 mb-8 space-y-4 text-start">
 							{groupedByYear[yearKey]?.map((p) => (
 								<li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
 									<PostPreview post={p} />

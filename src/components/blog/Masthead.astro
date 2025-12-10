@@ -32,7 +32,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	)
 }
 {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
-<h1 class="post-title text-center">
+<h1 class="post-title">
 	{data.title}
 </h1>
 <div class="flex items-start justify-between gap-x-4 text-xs">
@@ -65,7 +65,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 					<>
 						{/* prettier-ignore */}
 						<span class="contents">
-							<a class="cactus-link inline-block before:content-['#'] tag" data-pagefind-filter={`tag:${tag}`} href={`/tags/${tag}/`}><span class="sr-only">View more blogs with the tag&nbsp;</span>{tag}
+							<a class="cactus-link inline-block before:content-['#'] tag" data-pagefind-filter={`tag:${tag}`} href={`/tags/${encodeURIComponent(tag)}/`}><span class="sr-only">View more blogs with the tag&nbsp;</span>{tag}
 							</a>{i < data.tags.length - 1 && ", "}
 						</span>
 					</>

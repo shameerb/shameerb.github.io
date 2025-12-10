@@ -20,7 +20,7 @@ const meta = {
 					<a
 						class="cactus-link tag inline-block"
 						data-astro-prefetch
-						href={`/tags/${tag}/`}
+						href={`/tags/${encodeURIComponent(tag)}/`}
 						title={`View posts with the tag: ${tag}`}
 					>
 						&#35;{tag}

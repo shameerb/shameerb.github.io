@@ -65,7 +65,7 @@ const tocPosition = siteConfig.tocPosition;
 									<a
 										class="cactus-link tag inline-block text-xs text-[var(--color-tx-3)] before:content-['#']"
 										data-pagefind-filter={`tag:${tag}`}
-										href={`/tags/${tag}/`}
+										href={`/tags/${encodeURIComponent(tag)}/`}
 									>
 										{tag}
 									</a>
