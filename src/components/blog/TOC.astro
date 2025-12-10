@@ -14,16 +14,17 @@ const toc = generateToc(headings);
 ---
 
 <details
+	open
 	class:list={[
-		Astro.props.position === "sidebar" && "border-l-2 border-[var(--color-ui-2)] pl-4 lg:sticky lg:top-12 lg:order-2 lg:basis-56 lg:max-w-56 lg:shrink-0"
+		Astro.props.position === "sidebar" && "lg:sticky lg:top-12 lg:order-2 lg:basis-56 lg:max-w-56 lg:shrink-0"
 	]}
 >
 	<summary
-		class="cursor-pointer text-sm font-medium text-[var(--color-tx-2)] mb-3 list-none flex items-center"
-		><span class="toggle-icon mr-2 inline-block">▼</span><span>Table of Contents</span></summary
+		class="cursor-pointer text-xs font-medium text-[var(--color-tx)] mb-2 list-none flex items-center"
+		><span class="toggle-icon mr-1 inline-block text-[10px]">▼</span><span>Table of Contents</span></summary
 	>
-	<nav class="text-sm ml-6">
-		<ol class="space-y-2">
+	<nav class="text-xs ml-4">
+		<ol class="space-y-1">
 			{toc.map((heading) => <TOCHeading heading={heading} />)}
 		</ol>
 	</nav>

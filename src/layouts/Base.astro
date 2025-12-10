@@ -21,7 +21,7 @@ const {
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen flex-col px-8 pt-8 font-sans text-sm font-normal antialiased sm:px-12 md:px-16 lg:px-20"
+		class="bg-global-bg text-global-text mx-auto flex min-h-screen flex-col px-8 pt-8 font-sans text-sm font-normal antialiased sm:px-12 md:px-12 lg:px-12"
 	>
 		<!-- SVG filter for marker highlight effect -->
 		<svg width="0" height="0" style="position: absolute;">
@@ -35,7 +35,7 @@ const {
 		<ThemeProvider />
 		<SkipLink />
 		<Header />
-		<main id="main" class="mt-6 max-w-2xl mx-auto w-full">
+		<main id="main" class="mt-6 max-w-lg mx-auto w-full">
 			<slot />
 		</main>
 		<Footer />

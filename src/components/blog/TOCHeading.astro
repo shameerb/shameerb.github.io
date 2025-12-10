@@ -15,12 +15,12 @@ const depthClass = `toc-h${depth}`;
 
 <li class={`${depth > 2 ? "ms-1" : ""} break-words`}>
 	<a
-		class={`line-clamp-2 hover:text-accent ${depthClass} ${depth === 2 ? "mt-2" : "mt-1"} block`}
+		class={`line-clamp-2 hover:text-accent ${depthClass} ${depth === 2 ? "mt-1" : "mt-0.5"} block`}
 		href={`#${slug}`}>{text}</a
 	>
 	{
 		!!children.length && (
-			<ol class="ms-2">
+			<ol class="ms-1">
 				{children.map((subheading) => (
 					<Astro.self heading={subheading} />
 				))}

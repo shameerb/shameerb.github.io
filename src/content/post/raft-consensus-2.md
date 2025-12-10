@@ -3,7 +3,7 @@ title: "Raft: An Understandable Guide to Consensus"
 description: "Raft: An Understandable Guide to Consensus"
 publishDate: "21 Augus 2025"
 updatedDate: "21 Augus 2025"
-tags: ["distributed-systems", "golang"]
+tags: ["distributed-systems", "golang", "consensus", "replication", "leader-election", "log-replication", "fault-tolerance", "etcd", "algorithms"]
 draft: true
 # showTOC: true
 ---

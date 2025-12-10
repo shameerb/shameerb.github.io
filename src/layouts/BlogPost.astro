@@ -18,7 +18,7 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.readingTime;
-const showTOC = (post.data.showTOC ?? siteConfig.enableTOC) && !!headings.length;
+const showTOC = (post.data.showTOC ?? false) && !!headings.length;
 const tocPosition = siteConfig.tocPosition;
 ---
 
@@ -30,33 +30,58 @@ const tocPosition = siteConfig.tocPosition;
 		title,
 	}}
 >
-	<article class="w-full grow break-words overflow-hidden" data-page find-body>
+	<article
+		class="relative mx-auto w-full max-w-lg grow overflow-visible break-words"
+		data-page
+		find-body
+	>
 		<div id="blog-hero" class="mb-4">
 			<Masthead content={post} readingTime={readingTime} />
 		</div>
-		{showTOC && tocPosition === "top" && (
-			<div class="mb-2">
-				<TOC headings={headings} position="top" />
-			</div>
-		)}
-		{tocPosition === "sidebar" ? (
-			<div class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-8">
-				{showTOC && <TOC headings={headings} position="sidebar" />}
-				<div
-					class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6 overflow-wrap-anywhere lg:flex-1 lg:min-w-0"
-				>
-					<slot />
-					<WebMentions />
+		{
+			showTOC && tocPosition === "top" && (
+				<div class="mb-2">
+					<TOC headings={headings} position="top" />
 				</div>
-			</div>
-		) : (
-			<div
-				class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none border-t border-[var(--color-ui-2)] pt-6 overflow-wrap-anywhere"
-			>
-				<slot />
-				<WebMentions />
-			</div>
-		)}
+			)
+		}
+		{
+			showTOC && tocPosition === "sidebar" && (
+				<aside class="hidden lg:absolute lg:top-0 lg:left-0 lg:block lg:h-full lg:w-48 lg:-translate-x-full lg:pr-6">
+					<div class="overflow-y-auto lg:sticky lg:top-24 lg:mt-32 lg:max-h-[calc(100vh-8rem)]">
+						<TOC headings={headings} position="sidebar" />
+					</div>
+				</aside>
+			)
+		}
+		{
+			!!post.data.tags?.length && (
+				<aside class="hidden lg:absolute lg:top-32 lg:right-0 lg:block lg:w-48 lg:translate-x-full lg:pl-6">
+					<div class="lg:sticky lg:top-24">
+						<div class="text-xs">
+							<h3 class="mb-2 font-medium text-[var(--color-tx-3)]">Tags</h3>
+							<div class="flex flex-wrap gap-1">
+								{post.data.tags.map((tag) => (
+									<a
+										class="cactus-link tag inline-block text-xs text-[var(--color-tx-3)] before:content-['#']"
+										data-pagefind-filter={`tag:${tag}`}
+										href={`/tags/${tag}/`}
+									>
+										{tag}
+									</a>
+								))}
+							</div>
+						</div>
+					</div>
+				</aside>
+			)
+		}
+		<div
+			class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none overflow-wrap-anywhere w-full max-w-none border-t border-[var(--color-ui-2)] pt-6"
+		>
+			<slot />
+			<WebMentions />
+		</div>
 	</article>
 	<button
 		class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"
@@ -96,4 +121,31 @@ const tocPosition = siteConfig.tocPosition;
 
 	const observer = new IntersectionObserver(callback);
 	observer.observe(targetHeader);
+
+	// TOC active section highlighting
+	const tocSidebar = document.querySelector("aside > div");
+	if (tocSidebar) {
+		const headings = document.querySelectorAll(".prose h2, .prose h3, .prose h4");
+		const tocLinks = tocSidebar.querySelectorAll("a");
+
+		function updateActiveTOC() {
+			let current = "";
+			headings.forEach((heading) => {
+				const top = heading.getBoundingClientRect().top;
+				if (top < 100) {
+					current = heading.id;
+				}
+			});
+
+			tocLinks.forEach((link) => {
+				link.classList.remove("text-accent", "font-semibold");
+				if (link.getAttribute("href") === `#${current}`) {
+					link.classList.add("text-accent", "font-semibold");
+				}
+			});
+		}
+
+		window.addEventListener("scroll", updateActiveTOC, { passive: true });
+		updateActiveTOC();
+	}
 </script>
