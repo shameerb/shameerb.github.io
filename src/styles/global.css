@@ -180,17 +180,14 @@
 		}
 	}
 
-	/* Primary heading (page titles) - matches title class exactly */
+	/* Primary heading (page titles) - matches blog post title size */
 	.heading-1 {
-		/* @apply  text-[var(--color-tx-2)] text-2xl font-semibold mb-6; */
-		@apply text-accent text-xl font-semibold mb-4 ;
+		@apply text-accent text-2xl font-normal mb-4;
 	}
 
 	/* Section headings */
 	.heading-2 {
-		/* @apply text-[var(--color-tx-2)] mb-6 text-xl font-normal */
-		/* @apply text-accent-2 mb-6 text-xl font-normal */
-		@apply text-accent mb-3 text-lg font-normal
+		@apply text-accent text-lg font-normal mb-2 mt-4;
 	}
 
 	/* Subsection headings like TOC */
@@ -219,7 +216,6 @@
 	/* Blog post title */
 	.post-title {
 		@apply text-accent text-2xl font-normal mb-4 pt-1 text-left;
-		/* Add any additional spacing used in blog post titles */
 	}
 
 	@media (max-width: 640px) {
