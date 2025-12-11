@@ -108,13 +108,12 @@
 	}
 
 	.header__title {
-		@apply text-3xl font-medium no-underline text-[var(--color-text)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
+		@apply text-3xl font-medium no-underline text-[var(--color-tx-3)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
 	}
 
 	.header__title:hover {
 		@apply opacity-100;
 		transform: translateY(-1px);
-		color: var(--color-accent);
 	}
 
 	.header__nav {
@@ -122,7 +121,7 @@
 	}
 
 	.header__link {
-		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2 text-[var(--color-text)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] tracking-[0.05em] opacity-90;
+		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2 text-[var(--color-tx)] font-normal text-sm font-['Inter',_'Work_Sans',_sans-serif] tracking-[0.05em] opacity-90;
 	}
 
 	.header__actions {
