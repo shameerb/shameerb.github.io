@@ -53,6 +53,7 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.11",
+		"puppeteer-core": "^25.1.0",
 		"reading-time": "^1.5.0",
 		"sharp": "^0.34.1",
 		"tailwindcss": "4.1.3",

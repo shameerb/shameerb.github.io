@@ -47,7 +47,7 @@
 
 		&[data-theme="dark"] {
 			color-scheme: dark;
-			--color-global-bg: #100F0F;
+			--color-global-bg: #1A1A1A;
 			--color-global-text: #FFFCF0;
 			--color-link: #4385BE;
 			--color-accent: #E6A15C;
@@ -108,12 +108,11 @@
 	}
 
 	.header__title {
-		@apply text-3xl font-medium no-underline text-[var(--color-tx-3)] font-['Caveat',_cursive] tracking-normal opacity-90 m-0 p-0 transition-all duration-300;
+		@apply font-sans text-base font-semibold tracking-[0.02em] no-underline text-[var(--color-tx)] m-0 p-0;
 	}
 
 	.header__title:hover {
-		@apply opacity-100;
-		transform: translateY(-1px);
+		@apply opacity-90;
 	}
 
 	.header__nav {
@@ -181,12 +180,12 @@
 
 	/* Primary heading (page titles) - matches blog post title size */
 	.heading-1 {
-		@apply text-accent text-2xl font-normal mb-4;
+		@apply text-tx text-2xl font-semibold mb-4;
 	}
 
 	/* Section headings */
 	.heading-2 {
-		@apply text-accent text-lg font-normal mb-2 mt-4;
+		@apply text-tx text-lg font-semibold mb-2 mt-4;
 	}
 
 	/* Subsection headings like TOC */
@@ -214,7 +213,13 @@
 
 	/* Blog post title */
 	.post-title {
-		@apply text-accent text-2xl font-normal mb-4 pt-1 text-left;
+		@apply text-tx text-2xl font-semibold mb-4 pt-1 text-left;
+	}
+
+	html[data-theme="dark"] .heading-1,
+	html[data-theme="dark"] .heading-2,
+	html[data-theme="dark"] .post-title {
+		color: var(--color-tx);
 	}
 
 	@media (max-width: 640px) {
@@ -223,19 +228,28 @@
 		}
 
 		.prose {
-			@apply max-w-full;
+			@apply max-w-full min-w-0;
 		}
 
-		.prose pre {
-			@apply overflow-x-auto;
+		.prose :is(img, video, iframe) {
+			@apply h-auto max-w-full;
+		}
+
+		.prose pre,
+		.prose :global(.expressive-code) {
+			@apply max-w-full overflow-x-auto;
 		}
 
 		.prose code {
 			@apply break-words;
 		}
 
+		.prose :is(p, li, td, th) {
+			@apply break-words;
+		}
+
 		.prose table {
-			@apply block overflow-x-auto;
+			@apply block max-w-full overflow-x-auto;
 		}
 	}
 
@@ -342,21 +356,43 @@
 	line-height: 1.55;
 
 	h1 {
-		@apply text-accent-2 text-xl font-normal mb-3;
+		@apply text-accent-2 text-xl font-normal;
+		margin-top: 0;
+		margin-bottom: 0.6em;
 	}
 	h2 {
-		@apply text-accent-2 text-lg font-normal mb-2 mt-4;
+		@apply text-accent-2 text-lg font-normal;
+		margin-top: 2.5em;
+		margin-bottom: 0.5em;
 	}
 	h3 {
-		@apply text-accent-2 text-base font-normal mb-1 mt-3;
+		@apply text-accent-2 text-base font-normal;
+		margin-top: 2em;
+		margin-bottom: 0.4em;
 	}
 	h4 {
-		@apply text-accent text-sm font-normal mb-1 mt-2;
+		@apply text-accent-2 text-sm font-normal;
+		margin-top: 1.75em;
+		margin-bottom: 0.4em;
 	}
 
 	p {
-		@apply mb-2;
+		margin-top: 1.15em;
+		margin-bottom: 1.15em;
 		line-height: 1.7142857;
+	}
+
+	/* Full-bleed media: break out of the narrow text column on desktop, capped at a wider page bound. */
+	@media (min-width: 768px) {
+		:is(img, figure, video, iframe) {
+			display: block;
+			width: min(100vw - 2rem, 1080px);
+			max-width: none;
+			margin-inline: auto;
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+		}
 	}
 
 	mark {

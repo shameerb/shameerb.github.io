@@ -1,91 +1,70 @@
 ---
 title: "Learning Raft by Building It"
-description: "Raft: An Understandable Guide to Consensus"
-publishDate: "21 Augus 2025"
-updatedDate: "21 Augus 2025"
+description: "Notes from writing a tiny Raft KV store in Go, and why the protocol matters if you run etcd, Consul, or Kubernetes."
+publishDate: "21 August 2025"
+updatedDate: "10 June 2026"
 tags: ["distributed-systems", "golang"]
-showTOC: false
+showTOC: true
 ---
 
-*The best way I've found to learn distributed systems is to build them.*
+Raft is the consensus protocol that keeps a group of machines in sync when some of them fail. It also sits underneath a lot of infrastructure you may already run: etcd (and therefore every Kubernetes control plane), Consul, CockroachDB, and NATS JetStream all use it. I had read the paper and watched the talks, but I only really understood it after building a small Raft-backed key/value store in Go. This post covers what I learned and what took the longest to get right.
 
-When I first started exploring the *consensus problem*, I quickly realized how abstract it felt. In theory it’s “just agreeing on a value.” In practice? Machines crash, networks drop packets, two nodes both think they’re in charge… and suddenly your “cluster” isn’t clustered at all.
+Code: [shameerb/toy-raft](https://github.com/shameerb/toy-raft).
 
-That’s why I chose to implement **Raft** in Go—not because the world needs another Raft implementation, but because building it forces you to understand what really happens when theory meets reality.
+## Background
 
-## Why Raft?
+Three machines each hold a copy of a database. A client writes to one of them. The other two need to end up with the same data. If one of the three is offline when the write happens, the other two should still make progress. If two of them receive conflicting writes at the same time, the cluster has to pick one and stick with it.
 
-Consensus is about making sure multiple replicas of a system agree on the same sequence of operations, even in the face of failures. Raft was designed to be:
+This is the same problem whether the data is a key/value store, a service catalog, or the desired state of a Kubernetes cluster. Any system that needs one consistent answer across several machines has to solve it somehow, and Raft is the design most of them have settled on.
 
-- **Understandable** → clear roles (leader, follower, candidate) and clean rules.
-- **Practical** → widely used in production systems like etcd (Kubernetes datastore), Consul, CockroachDB, and TiKV.
-- **Reliable** → once something is committed, it’s committed everywhere.
+Raft solves this by giving the cluster a single leader. Clients send writes to the leader, and the leader is responsible for getting the other nodes (followers) to apply the same writes in the same order. If the leader stops responding, the followers elect a new one.
 
-In short: Raft makes a messy cluster behave like a single reliable system.
+The rest of Raft is the set of rules that keep leader election and replication correct when nodes fail or messages are dropped.
 
-In practice, Raft is used for:
--  Metadata/configuration stores (etcd, Consul).
--  Databases with replication (CockroachDB, TiKV).
--  Coordination services where strong consistency matters.
+## How it works
 
-## How Raft Works (at a High Level)
+There are three parts to understand.
 
-### Leader Election
--  Nodes start as followers.
--  If they don’t hear from a leader, they hold an election.
--  Majority vote decides the leader; ties resolve via randomized timeouts.
+**Leader election.** Each node runs a countdown timer. If the timer expires before the node hears from a leader, the node starts an election by asking the others to vote for it. A candidate that receives votes from a majority of the cluster becomes leader. The timers are set to random values within a range so that two nodes are unlikely to start an election at exactly the same instant. Without that randomization, candidates split the vote and no one wins.
 
-### Log Replication
-- Clients send commands (e.g. `SET key value`) to the leader.
-- The leader appends the command to its log and replicates it to followers.
-- Once a majority acknowledge, the entry is committed and applied everywhere.
+**Replication.** Clients send writes to the leader. The leader appends the write to its log, then sends the entry to the followers in an AppendEntries RPC. Once a majority of nodes have acknowledged the entry, the leader marks it as committed and applies it to its state machine. Followers learn about the commit on the next AppendEntries and apply the entry to their own state machines.
 
-### Safety
-- One leader per term.
-- Logs with the same index and term are identical.
-- Committed entries are never rolled back.
+**Safety.** Raft has additional rules that prevent a newly elected leader from losing committed data. The most important one: a candidate can only win an election if its log is at least as up to date as a majority of voters. Section 5 of the Raft paper covers safety in detail, and the visualization linked at the bottom of this post walks through it.
 
-## What I Actually Built
+## What I built
 
-To keep things simple, I built a **toy Raft-backed key/value store**:
-- Three nodes running in one process.
-- Elections and heartbeats managed with timers.
-- Commands flow through leader election, replication, and commitment.
-- Snapshots and write-ahead logs for persistence, so nodes can restart without forgetting their state.
+The KV store exposes two commands: `SET key value` and `GET key`. All three replicas return the same value for a given key.
 
-It’s not production-ready—no network partitions, no cluster reconfiguration—but it demonstrates the core Raft mechanics clearly.
+Some implementation shortcuts:
 
+- The three nodes are three goroutines in a single Go process. They communicate through Go channels, not real RPC.
+- State is persisted with a write-ahead log and periodic snapshots. Restarting the process does not lose committed entries.
+- I did not implement cluster membership changes, log compaction beyond snapshots, or recovery from network partitions.
 
-## Why Build Instead of Just Read?
+The core of the election timer reset:
 
-Because **building makes the abstractions real**.
-- Timeouts stop being abstract numbers—you *feel* them when your leader disappears.
-- Watching logs replicate across nodes shows you how consistency emerges.
-- Crashing a node mid-commit teaches more than any paper footnote ever could.
+```go
+func (n *Node) resetElectionTimer() {
+    if n.electionTimer != nil {
+        n.electionTimer.Stop()
+    }
+    timeout := minElectionTimeout + time.Duration(rand.Int63n(int64(electionJitter)))
+    n.electionTimer = time.AfterFunc(timeout, n.startElection)
+}
+```
 
-That hands-on experience is what makes distributed systems less mysterious and more approachable.
+Two things about this code. First, `rand.Int63n` is the source of the randomized timeout that keeps candidates from starting simultaneous elections. Each node's timeout is drawn independently, so the first one to time out has a real chance of completing its election before the others react. Second, the timer has to be reset every time the node receives a valid AppendEntries from the current leader. If the reset is missing, every node's timer expires on the first interval and they all become candidates at once.
 
+## Notes if you build your own
 
-## What’s Next
+The heartbeat interval and election timeout have to be sized correctly relative to each other. The election timeout has to be several times larger than the heartbeat interval. If they are close, followers time out before the next heartbeat arrives and the cluster keeps electing new leaders instead of replicating writes. The symptom is a cluster that looks busy but never commits anything. The Raft paper suggests a heartbeat of 10 to 50 milliseconds and an election timeout of 150 to 300 milliseconds. I started outside those ranges and spent an evening chasing the symptoms before reading section 5.6 of the paper. The same constraint shows up in production: etcd exposes `--heartbeat-interval` and `--election-timeout` as tuning flags for exactly this reason, mainly for clusters spread across high-latency links.
 
-This post was about the *concepts*—why Raft matters and what problems it solves.
-
-In **another post**, I’ll walk through the actual **Go implementation** of the toy KV store: how elections are coded, how log replication is wired, and where the tricky edge cases live.
-
-
-## Takeaway
-
-Consensus is a hard problem, but Raft makes it accessible. By implementing even a small version, you can see how leader election, log replication, and safety guarantees keep a cluster consistent.
-
-And once you’ve seen Raft in action, you’ll recognize it as the beating heart of many of today’s distributed systems.
+The other thing that took time was the order of operations when committing an entry. The leader has to wait until a majority of replicas have appended the entry to their logs before it applies the entry locally and responds to the client. If the leader responds first and only then waits for replication, the response is fast but the write can be lost if the leader fails before the followers catch up.
 
 ## Resources
 
-* [The Raft Consensus Algorithm](https://raft.github.io/)
-  A central hub for Raft: papers, talks, course material, and open-source implementations.
-
-* [The Secret Lives of Data: Raft Visualization](https://thesecretlivesofdata.com/raft/)
-  An excellent interactive visualization of leader election, log replication, and failure recovery.
-
-* [Designing for Understandability: The Raft Consensus Algorithm (Talk)](https://www.youtube.com/watch?v=vYp4LYbnnW8)
-  A conference talk by Raft’s authors on why Raft was created and how it emphasizes clarity.
+| Link | Notes |
+|------|--------|
+| [Raft consensus site](https://raft.github.io/) | Papers, talks, courses, and implementations. |
+| [The Secret Lives of Data: Raft](https://thesecretlivesofdata.com/raft/) | Interactive visualization of elections, replication, and recovery. |
+| [Designing for Understandability (talk)](https://www.youtube.com/watch?v=vYp4LYbnnW8) | The original authors on why Raft prioritizes clarity. |

@@ -2,7 +2,7 @@
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "Projects by Shameer - A collection of my personal projects and experiments",
+	description: "Things I've built. Paid work at the top, side experiments below.",
 	title: "Projects",
 };
 ---
@@ -10,50 +10,73 @@ const meta = {
 <PageLayout meta={meta}>
 	<section>
 		<h1 class="heading-1">Projects</h1>
-		<div class="space-y-8">
+		<p class="mb-6">
+			A short list of things I've built, with current paid work first and side
+			experiments below.
+		</p>
+
+		<div class="space-y-10">
 			<div>
-				<h2 class="heading-2">Sample Project</h2>
-				<p class="mb-4 opacity-75">
-					This is a placeholder for a real project. A brief description of what this project does,
-					the problem it solves, and the technologies used to build it would go here.
+				<h2 class="heading-2">Memfold AI</h2>
+				<p class="mb-3">
+					Founding engineer (Feb 2026–present), working on two products:
 				</p>
-				<p class="mb-4 opacity-75">
-					Technologies: Go, PostgreSQL, Docker, Kubernetes
+				<ul class="mb-3 ml-5 list-disc space-y-1">
+					<li>
+						A conversational, screen-aware Mac desktop assistant that takes
+						long-running tasks off the user's hands: background work, browser
+						automation, document and slide editing, meeting transcription. Built
+						on a live screen-and-audio context pipeline plus an LLM agent
+						harness.
+					</li>
+					<li>
+						Almanac, a thinking tool for deep research and writing, with
+						real-time collaboration.
+					</li>
+				</ul>
+				<p class="mb-3">
+					What I own: backend orchestration, distributed systems, the context
+					pipeline (built on screenpipe), CI/CD and release infrastructure for
+					signed Mac DMGs, and a secrets-management proxy for LLM keys.
 				</p>
-				<div class="flex gap-4">
-					<a href="#" class="cactus-link">View Project</a>
-					<a href="#" class="cactus-link">GitHub</a>
-				</div>
+				<p class="mb-3">
+					Stack: Python, TypeScript, FastAPI, Node.js, Electron, Postgres, GCP,
+					Claude Agent SDK, Deepgram, ElevenLabs.
+				</p>
 			</div>
 
 			<div>
-				<h2 class="heading-2">Another Project</h2>
-				<p class="mb-4 opacity-75">
-					Description of another interesting project. This could be an open-source contribution,
-					a personal experiment, or a side project that demonstrates specific skills or technologies.
+				<h2 class="heading-2">toy-raft</h2>
+				<p class="mb-3">
+					A small Raft-backed key/value store in Go, written to understand the
+					protocol by building it. Three replicas as goroutines, Go channels in
+					place of RPC, write-ahead log and periodic snapshots for persistence.
 				</p>
-				<p class="mb-4 opacity-75">
-					Technologies: TypeScript, React, Node.js, AWS
+				<p class="mb-3">
+					Write-up:
+					<a href="/posts/raft/" class="cactus-link">Learning Raft by Building It</a>.
+					Code:
+					<a
+						href="https://github.com/shameerb/toy-raft"
+						class="cactus-link">github.com/shameerb/toy-raft</a
+					>.
 				</p>
-				<div class="flex gap-4">
-					<a href="#" class="cactus-link">View Project</a>
-					<a href="#" class="cactus-link">GitHub</a>
-				</div>
 			</div>
 
 			<div>
-				<h2 class="heading-2">Experimental Tool</h2>
-				<p class="mb-4 opacity-75">
-					An experimental developer tool or library. This section would describe the motivation
-					behind the project, key features, and how it can be used by others.
+				<h2 class="heading-2">This site</h2>
+				<p class="mb-3">
+					Personal site and blog. Astro 5, customized Flexoki palette, full-bleed
+					prose, hand-written content. The CSS rhythm and the type stack are
+					tuned to read like a long-form notebook rather than a marketing page.
 				</p>
-				<p class="mb-4 opacity-75">
-					Technologies: Rust, WebAssembly, GraphQL
+				<p class="mb-3">
+					Code:
+					<a
+						href="https://github.com/shameerb/website"
+						class="cactus-link">github.com/shameerb/website</a
+					>.
 				</p>
-				<div class="flex gap-4">
-					<a href="#" class="cactus-link">View Project</a>
-					<a href="#" class="cactus-link">GitHub</a>
-				</div>
 			</div>
 		</div>
 	</section>

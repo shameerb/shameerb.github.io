@@ -31,7 +31,7 @@ const tocPosition = siteConfig.tocPosition;
 	}}
 >
 	<article
-		class="relative mx-auto w-full max-w-lg grow overflow-visible break-words"
+		class="relative mx-auto w-full min-w-0 max-w-lg grow break-words"
 		data-page
 		find-body
 	>
@@ -77,7 +77,7 @@ const tocPosition = siteConfig.tocPosition;
 			)
 		}
 		<div
-			class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none overflow-wrap-anywhere w-full max-w-none border-t border-[var(--color-ui-2)] pt-6"
+			class="prose prose-sm prose-headings:font-medium prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-th:before:content-none w-full max-w-none min-w-0 border-t border-[var(--color-ui-2)] pt-6 [overflow-wrap:anywhere]"
 		>
 			<slot />
 			<WebMentions />

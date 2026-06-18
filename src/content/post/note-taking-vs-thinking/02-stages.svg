@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Placeholder: stages of thinking diagram">
+  <rect width="1600" height="600" fill="#282726"/>
+
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#878580"/>
+    </marker>
+  </defs>
+
+  <!-- four stages -->
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="30" text-anchor="middle">
+    <rect x="80"   y="200" width="280" height="160" rx="14" fill="#205ea6" opacity="0.78"/>
+    <text x="220"  y="295" fill="#fffcf0">Collecting</text>
+
+    <rect x="480"  y="200" width="280" height="160" rx="14" fill="#205ea6" opacity="0.78"/>
+    <text x="620"  y="295" fill="#fffcf0">Connecting</text>
+
+    <rect x="880"  y="200" width="280" height="160" rx="14" fill="none" stroke="#6f6e69" stroke-width="2" stroke-dasharray="8 8"/>
+    <text x="1020" y="295" fill="#b7b5ac">Transforming</text>
+
+    <rect x="1280" y="200" width="280" height="160" rx="14" fill="none" stroke="#6f6e69" stroke-width="2" stroke-dasharray="8 8"/>
+    <text x="1420" y="295" fill="#b7b5ac">Expressing</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#878580" stroke-width="3" fill="none">
+    <line x1="360"  y1="280" x2="478"  y2="280" marker-end="url(#arrow)"/>
+    <line x1="760"  y1="280" x2="878"  y2="280" marker-end="url(#arrow)"/>
+    <line x1="1160" y1="280" x2="1278" y2="280" marker-end="url(#arrow)"/>
+  </g>
+
+  <text x="800" y="470" fill="#b7b5ac" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" text-anchor="middle">
+    where TfT tools sit today (filled) and where the work isn't being done (dashed)
+  </text>
+
+  <text x="800" y="565" fill="#6f6e69" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" text-anchor="middle">placeholder · stages of thinking</text>
+</svg>

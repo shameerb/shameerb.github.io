@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "Personal website of Shameer",
+	description: "Notes from Shameer Baramy, founding engineer at Memfold AI, on backend, platform engineering, distributed systems, AI agents, and tools for thought.",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
@@ -50,10 +50,11 @@ export const menuLinks: { path: string; title: string }[] = [
 		path: "/posts/",
 		title: "blog",
 	},
-	// {
-	// 	path: "/about/",
-	// 	title: "about me",
-	// },
+	{
+		path: "/about/",
+		title: "about me",
+	},
+	// Projects page hidden from nav for now. Re-enable by uncommenting.
 	// {
 	// 	path: "/projects/",
 	// 	title: "projects",
@@ -70,8 +71,8 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		borderRadius: "4px",
 		codeFontFamily:
 			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-		codeFontSize: "0.875rem",
-		codeLineHeight: "1.7142857rem",
+		codeFontSize: "0.7rem",
+		codeLineHeight: "1.6",
 		codePaddingInline: "1rem",
 		frames: {
 			frameBoxShadowCssValue: "none",
