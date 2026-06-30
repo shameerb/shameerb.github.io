@@ -24,5 +24,10 @@ pnpm-debug.log*
 .cache
 .astro
 
+# editor / tooling state
+.vscode/
+.idea/
+.omc/
+
 # blog notes (personal reference)
 blog-notes/
