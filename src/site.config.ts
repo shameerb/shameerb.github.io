@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "Notes from Shameer Baramy, founding engineer at Memfold AI, on backend, platform engineering, distributed systems, AI agents, and tools for thought.",
+	description: "Notes from Shameer Baramy, a backend and platform engineer, on backend, platform engineering, distributed systems, AI agents, and tools for thought.",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
